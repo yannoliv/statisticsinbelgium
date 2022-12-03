@@ -61,16 +61,17 @@ async function submitModalForm(event) {
     'salary_netto': parseFloat(formData.salary_netto), 'car_model': formData.car_model,
     'experience': parseFloat(formData.experience), 'happy': formData.happy.value.mood
   }
-  const { iData, iError } = await supabase
-    .from('Salary')
-    .insert([newLine])
+  console.log(newLine)
+  // const { iData, iError } = await supabase
+  //   .from('Salary')
+  //   .insert([newLine])
 
-  data.push(newLine)
-  closeModalForm()
+  // data.push(newLine)
+  // closeModalForm()
   
-  setTimeout(function() {
-    openModalTy()
-  }, 500)
+  // setTimeout(function() {
+  //   openModalTy()
+  // }, 500)
 }
 
 </script>
@@ -188,7 +189,7 @@ async function submitModalForm(event) {
                       </InputField>
 
                       <div>
-                        <RadioGroup v-model="formData.selectedMood">
+                        <RadioGroup v-model="selectedMood">
                           <RadioGroupLabel class="block text-sm font-medium text-gray-700">Mood at work
                           </RadioGroupLabel>
                           <div class="mt-2 flex items-center space-x-3 flex-wrap">
