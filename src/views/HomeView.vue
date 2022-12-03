@@ -25,6 +25,7 @@ const selectedMood = ref(moods[0])
 var { count, data } = await supabase
   .from('Salary')
   .select()
+  .order('created_at')
 
 
 var formData = {
@@ -110,21 +111,21 @@ async function submitModalForm(event) {
         <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
             <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-              <table class="min-w-full divide-y divide-gray-300">
+              <table class="w-full flex flex-row flex-no-wrap overflow-hidden divide-y divide-gray-300">
                 <thead class="bg-gray-50">
-                  <tr>
-                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                  <tr v-for="person in data" :key="person.id" class="flex flex-col flex-no wrap sm:table-row py-5">
+                    <th scope="col" class="px-3 py-4 text-left text-sm font-semibold text-gray-900">
                       Position</th>
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Bruto</th>
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Netto</th>
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Car</th>
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Experience</th>
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Mood</th>
+                    <th scope="col" class="px-3 py-4 text-left text-sm font-semibold text-gray-900">Bruto</th>
+                    <th scope="col" class="px-3 py-4 text-left text-sm font-semibold text-gray-900">Netto</th>
+                    <th scope="col" class="px-3 py-4 text-left text-sm font-semibold text-gray-900">Car</th>
+                    <th scope="col" class="px-3 py-4 text-left text-sm font-semibold text-gray-900">Experience</th>
+                    <th scope="col" class="px-3 py-4 text-left text-sm font-semibold text-gray-900">Mood</th>
                   </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-200 bg-white">
-                  <tr v-for="person in data" :key="person.id">
-                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{
+                <tbody class="flex-1 sm:flex-none divide-y divide-gray-200 bg-white">
+                  <tr v-for="person in data" :key="person.id" class="flex flex-col flex-no wrap sm:table-row py-5">
+                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">{{
                         person.job_position
                     }}</td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">€ {{ person.salary_bruto }}</td>
@@ -190,7 +191,7 @@ async function submitModalForm(event) {
                         <RadioGroup v-model="formData.selectedMood">
                           <RadioGroupLabel class="block text-sm font-medium text-gray-700">Mood at work
                           </RadioGroupLabel>
-                          <div class="mt-2 flex items-center space-x-3">
+                          <div class="mt-2 flex items-center space-x-3 flex-wrap">
                             <RadioGroupOption as="template" v-for="mood in moods" :key="mood.mood" :value="mood"
                               v-slot="{ active, checked }">
                               <div
@@ -259,3 +260,17 @@ async function submitModalForm(event) {
     </TransitionRoot>
   </main>
 </template>
+
+
+<style scoped>
+  @media (min-width: 640px) {
+    table {
+      display: inline-table !important;
+    }
+
+    thead tr:not(:first-child) {
+      display: none;
+    }
+  }
+
+</style>
