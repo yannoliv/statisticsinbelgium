@@ -62,16 +62,16 @@ async function submitModalForm(event) {
     'experience': parseFloat(formData.experience), 'happy': formData.happy.value.mood
   }
   console.log(newLine)
-  // const { iData, iError } = await supabase
-  //   .from('Salary')
-  //   .insert([newLine])
+  const { iData, iError } = await supabase
+    .from('Salary')
+    .insert([newLine])
 
-  // data.push(newLine)
-  // closeModalForm()
+  data.push(newLine)
+  closeModalForm()
   
-  // setTimeout(function() {
-  //   openModalTy()
-  // }, 500)
+  setTimeout(function() {
+    openModalTy()
+  }, 500)
 }
 
 </script>
