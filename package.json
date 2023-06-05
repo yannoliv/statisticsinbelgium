@@ -15,7 +15,9 @@
     "firebase": "^9.14.0",
     "heroicons": "^2.0.13",
     "pinia": "^2.0.26",
+    "sortablejs": "^1.15.0",
     "vue": "^3.2.45",
+    "vue-chartjs": "^5.2.0",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
